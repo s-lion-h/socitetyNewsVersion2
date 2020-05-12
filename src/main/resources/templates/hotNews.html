@@ -1,0 +1,44 @@
+<div th:fragment="hotNews" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="row">
+        <div class="col-9">
+            <h2 class="text-center text-danger">全网最新新闻——极速获取财经资讯</h2>
+            <hr>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">标题</th>
+                    <!--<th scope="col">数据源</th>-->
+                    <th scope="col">报刊</th>
+                    <th scope="col">发布时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="news:${latestNewsList}">
+                    <td><a th:href="'/newsDetail?newsId='+${news.idnews}" th:text="${news.title}"></a></td>
+                    <!--<td th:text="${news.journal}"></td>-->
+                    <td th:text="${news.newssource}"></td>
+                    <td th:text="${#dates.format(news.publishtime,'yyyy年MM月dd日 HH:mm:ss')}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-3" style="background-color: #f2e382">
+            <h3 class="text-center" style="color: #f2ac00;">留言板</h3>
+            <hr>
+            <th:block th:each="border:${borderList}">
+                <p th:text="${border.ip}+'：'+${border.content}"></p>
+                <p th:text="'————'+${#dates.format(border.createtime,'yyyy年MM月dd日 HH:mm:ss')}"></p>
+                <hr>
+            </th:block>
+            <hr>
+            <form action="/addBorder" class="row" style="bottom: 2% ; position: absolute;">
+                <div class="col-8">
+                    <textarea type="text" name="content" class="form-control" rows="5"></textarea>
+                </div>
+                <div class="col-4">
+                    <input type="submit" class="btn btn-primary btn-block" value="提交">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+    <th:block th:include="head::head"></th:block>
+
+</head>
+<body>
+<div class="container touming">
+<th:block th:include="nav::nav"></th:block>
+    <th:block th:include="classificationLabel::classificationLabel"></th:block>
+    <div class="row">
+        <div class="col-9">
+            <h4 th:text="${classificationName}+'——分类新闻'" class="text-danger">分类新闻</h4>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col" width="8%">类型</th>
+                    <th scope="col">标题</th>
+                    <!--<th scope="col">数据源</th>-->
+                    <th scope="col">报刊</th>
+                    <th scope="col">发布时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="news:${newsList}">
+                    <td th:text="${classificationName}"></td>
+                    <td><a th:href="'/newsDetail?newsId='+${news.idnews}" th:text="${news.title}"></a></td>
+                    <!--<td th:text="${news.journal}"></td>-->
+                    <td th:text="${news.newssource}"></td>
+                    <td th:text="${#dates.format(news.publishtime,'yyyy年MM月dd日 HH:mm:ss')}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-3">
+            <th:block th:include="scrollNews::scrollNews"></th:block>
+
+        </div>
+    </div>
+    <th:block th:include="footer::footer"></th:block>
+
+</div>
+</body>
+</html>
